@@ -13,6 +13,27 @@ def index():
     """
     return render_template('index.html')
 
+@app.route('/wx', methods=['GET'])
+def get_wx():
+    """
+    :return: 返回echostr
+    """
+    signature = request.args.get('signature')
+    timestamp = request.args.get('timestamp')
+    nonce = request.args.get('nonce')
+    token = 'xiaomaoJIA123'
+
+    list = [token, timestamp, nonce]
+    list.sort()
+    sha1 = hashlib.sha1()
+    sha1.update(list[0].encode('utf-8'))
+    sha1.update(list[1].encode('utf-8'))
+    sha1.update(list[2].encode('utf-8'))
+    hashcode = sha1.hexdigest()
+    echostr = request.args.get('echostr')
+    if hashcode == signature:
+        return echostr
+    return ""
 
 @app.route('/api/count', methods=['POST'])
 def count():
