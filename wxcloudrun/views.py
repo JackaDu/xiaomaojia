@@ -30,10 +30,11 @@ def receive_msg():
     from_user = params['FromUserName']
     to_user = params['ToUserName']
     content = params['Content']
+    t = params['CreateTime']
     res = {
         "ToUserName": from_user,
         "FromUserName": to_user,
-        "CreateTime": time.time(),
+        "CreateTime": t,
         "MsgType": "text",
         "Content": content
     }
