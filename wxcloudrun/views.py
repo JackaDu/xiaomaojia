@@ -4,7 +4,7 @@ from run import app
 from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter, update_counterbyid
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
-import hashlib, time, json
+import hashlib, time, json, requests
 
 
 @app.route('/')
@@ -38,6 +38,17 @@ def receive_msg():
         "MsgType": "text",
         "Content": content
     }
+
+    # 主动回复
+    url = 'http://api.weixin.qq.com/cgi-bin/message/custom/send'
+    extra_res = {
+        "touser": from_user,
+        "msgtype": "text",
+        "text": {
+          "content": "content"
+        }
+    }
+    requests.post(url, json=extra_res)
     return json.dumps(res)
 
 @app.route('/api/count', methods=['POST'])
