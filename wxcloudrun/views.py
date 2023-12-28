@@ -38,7 +38,7 @@ def receive_msg():
         "MsgType": "text",
         "Content": content
     }
-    return make_succ_response(res)
+    return res
 
 @app.route('/api/count', methods=['POST'])
 def count():
