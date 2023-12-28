@@ -4,7 +4,7 @@ from run import app
 from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter, update_counterbyid
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
-import hashlib, time
+import hashlib, time, json
 
 
 @app.route('/')
@@ -36,9 +36,9 @@ def receive_msg():
         "FromUserName": to_user,
         "CreateTime": t,
         "MsgType": "text",
-        "Content": content.encode('utf8')
+        "Content": content
     }
-    return res
+    return json.dumps(res)
 
 @app.route('/api/count', methods=['POST'])
 def count():
