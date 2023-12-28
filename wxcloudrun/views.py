@@ -21,7 +21,7 @@ def receive_msg():
     """
 
     # 获取请求体参数
-    print(request)
+
     params = request.get_json()
     print(params)
     if 'FromUserName' not in params:
@@ -36,7 +36,7 @@ def receive_msg():
         "FromUserName": to_user,
         "CreateTime": t,
         "MsgType": "text",
-        "Content": content
+        "Content": content.decode('utf-8')
     }
 
     # 主动回复
