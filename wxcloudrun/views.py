@@ -22,6 +22,8 @@ def receive_msg():
 
     # 获取请求体参数
     params = request.get_json()
+    if 'FromUserName' not in params:
+        return ""
 
     from_user = params['FromUserName']
     print(from_user)
