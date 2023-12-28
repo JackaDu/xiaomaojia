@@ -36,7 +36,7 @@ def receive_msg():
         "FromUserName": to_user,
         "CreateTime": t,
         "MsgType": "text",
-        "Content": content
+        "Content": content.encode('utf8')
     }
     return res
 
