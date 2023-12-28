@@ -14,27 +14,18 @@ def index():
     """
     return render_template('index.html')
 
-@app.route('/wx', methods=['GET'])
-def get_wx():
+@app.route('/msg', methods=['POST'])
+def receive_msg():
     """
-    :return: 返回echostr
+    :return:返回自定义消息
     """
-    signature = request.args.get('signature')
-    timestamp = request.args.get('timestamp')
-    nonce = request.args.get('nonce')
-    token = 'xiaomaoJIA123'
 
-    list = [token, timestamp, nonce]
-    list.sort()
-    sha1 = hashlib.sha1()
-    sha1.update(list[0].encode('utf-8'))
-    sha1.update(list[1].encode('utf-8'))
-    sha1.update(list[2].encode('utf-8'))
-    hashcode = sha1.hexdigest()
-    echostr = request.args.get('echostr')
-    if hashcode == signature:
-        return echostr
-    return ""
+    # 获取请求体参数
+    params = request.get_json()
+
+    from_user = params['FromUserName']
+    print(from_user)
+    return from_user
 
 @app.route('/api/count', methods=['POST'])
 def count():
