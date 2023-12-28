@@ -36,7 +36,7 @@ def receive_msg():
         "FromUserName": to_user,
         "CreateTime": t,
         "MsgType": "text",
-        "Content": content.decode('utf-8')
+        "Content": str(content, 'utf-8')
     }
 
     # 主动回复
