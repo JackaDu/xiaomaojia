@@ -38,7 +38,6 @@ def receive_msg():
         "MsgType": "text",
         "Content": str(content, 'utf-8')
     }
-
     # 主动回复
     url = 'http://api.weixin.qq.com/cgi-bin/message/custom/send'
     extra_res = {
