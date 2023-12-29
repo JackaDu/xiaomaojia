@@ -50,7 +50,7 @@ async def receive_msg():
 
 async def make_extra_reply(res):
     url = 'http://api.weixin.qq.com/cgi-bin/message/custom/send'
-    requests.post(url, json=json.dumps(res, ensure_ascii=False))
+    requests.post(url, json=res)
 
 @app.route('/api/count', methods=['POST'])
 def count():
