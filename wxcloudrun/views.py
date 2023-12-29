@@ -47,7 +47,7 @@ def receive_msg():
           "content": content
         }
     }
-    requests.post(url, json=json.dumps(extra_res, ensure_ascii=False))
+    requests.post(url, json=extra_res)
     return json.dumps(res, ensure_ascii=False)
 
 @app.route('/api/count', methods=['POST'])
