@@ -36,7 +36,7 @@ def receive_msg():
         "FromUserName": to_user,
         "CreateTime": t,
         "MsgType": "text",
-        "Content": str(content, 'utf-8')
+        "Content": content
     }
     # 主动回复
     url = 'http://api.weixin.qq.com/cgi-bin/message/custom/send'
@@ -44,11 +44,11 @@ def receive_msg():
         "touser": from_user,
         "msgtype": "text",
         "text": {
-          "content": "content"
+          "content": content
         }
     }
-    requests.post(url, json=extra_res)
-    return json.dumps(res)
+    requests.post(url, json=json.dumps(extra_res, ensure_ascii=False))
+    return json.dumps(res, ensure_ascii=False)
 
 @app.route('/api/count', methods=['POST'])
 def count():
