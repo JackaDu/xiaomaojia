@@ -49,7 +49,7 @@ async def receive_msg():
     await make_extra_reply(extra_res)
     return json.dumps(res, ensure_ascii=False)
 
-def make_extra_reply(res):
+async def make_extra_reply(res):
     url = 'http://api.weixin.qq.com/cgi-bin/message/custom/send'
     requests.post(url, json=res)
 
