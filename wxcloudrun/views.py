@@ -15,7 +15,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/msg', methods=['POST'])
-def receive_msg():
+async def receive_msg():
     """
     :return:返回自定义消息
     """
@@ -39,7 +39,6 @@ def receive_msg():
         "Content": content
     }
     # 主动回复
-    url = 'http://api.weixin.qq.com/cgi-bin/message/custom/send'
     extra_res = {
         "touser": from_user,
         "msgtype": "text",
@@ -47,8 +46,12 @@ def receive_msg():
           "content": content
         }
     }
-    requests.post(url, json=extra_res)
+    await make_extra_reply(extra_res)
     return json.dumps(res, ensure_ascii=False)
+
+def make_extra_reply(res):
+    url = 'http://api.weixin.qq.com/cgi-bin/message/custom/send'
+    requests.post(url, json=res)
 
 @app.route('/api/count', methods=['POST'])
 def count():
